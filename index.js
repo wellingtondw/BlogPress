@@ -3,9 +3,6 @@ const bodyParser = require('body-parser')
 const app = express();
 const connection = require('./config/database')
 
-require('./models');
-require('./controllers');
-
 connection.authenticate()
   .then(() => console.log('connected to the database'))
   .catch(err => console.log(err));
@@ -18,9 +15,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 
+require('./models');
 
-app.get('/', (req, res) => {
-  res.render('index');
-});
+app.use('/', require('./routes'));
 
 app.listen(3000, () => console.log('Server is running on port 3000'));
