@@ -1,8 +1,10 @@
 const express = require('express');
 const bodyParser = require('body-parser')
 const app = express();
-
 const connection = require('./config/database')
+
+require('./models');
+require('./controllers');
 
 connection.authenticate()
   .then(() => console.log('connected to the database'))
@@ -14,6 +16,7 @@ app.use(express.static('public'));
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
 
 
 app.get('/', (req, res) => {
