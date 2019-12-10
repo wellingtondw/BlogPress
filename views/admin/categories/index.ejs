@@ -1,0 +1,38 @@
+<%- include('../../partials/header'); %>
+
+<body>
+  <%- include('../../partials/navbar'); %>
+  <div class="container">
+    <hr>
+    <h2>Categorias</h2>
+    <hr>
+    <a href="/admin/categories/new" class="btn btn-primary mb-4 mt-4">Cadastrar Categoria</a>
+
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th scope="col">Id</th>
+          <th scope="col">Título</th>
+          <th scope="col">Slug</th>
+          <th scope="col">Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% categories.forEach(category => { %>
+        <tr>
+          <th scope="row"><%= category.id %></th>
+          <td><%= category.title %></td>
+          <td><%= category.slug %></td>
+          <td>
+            <a href="" class="btn btn-warning">Editar</a>
+            <a href="" class="btn btn-danger">Excluir</a>
+          </td>
+        </tr>
+        <% }); %>
+      </tbody>
+    </table>
+
+  </div>
+</body>
+
+<%- include('../../partials/footer'); %>

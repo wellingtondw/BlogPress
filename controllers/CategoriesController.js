@@ -16,7 +16,15 @@ class CategoriesController {
       title,
       slug: slugify(title)
     })
-      .then(() => res.redirect('/'))
+      .then(() => res.redirect('/admin/categories'))
+      .catch(err => console.log(err));
+  }
+
+  showCategories(req, res) {
+    Category.findAll({})
+      .then(categories => {
+        res.render('admin/categories/index', { categories });
+      })
       .catch(err => console.log(err));
   }
 }
