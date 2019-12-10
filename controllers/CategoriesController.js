@@ -27,6 +27,20 @@ class CategoriesController {
       })
       .catch(err => console.log(err));
   }
+
+  deleteCategory(req, res) {
+    const { id } = req.body;
+
+    if (id.length <= 0) return res.redirect('/admin/categories');
+
+    if (isNaN(id)) return res.redirect('/admin/categories');
+
+    Category.destroy({
+      where: {
+        id
+      }
+    }).then(() => res.redirect('/admin/categories'));
+  }
 }
 
 module.exports = CategoriesController;
