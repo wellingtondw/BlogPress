@@ -41,6 +41,34 @@ class CategoriesController {
       }
     }).then(() => res.redirect('/admin/categories'));
   }
+
+  editCategory(req, res) {
+    const { id } = req.params;
+
+    if (isNaN(id)) res.redirect('/admin/categories');
+
+    Category.findByPk(id).then(category => {
+
+      if (!category) res.redirect('/admin/categories');
+
+      res.render('admin/categories/edit', { category });
+    }).catch(err => console.log(err));
+  }
+
+  updateCategory(req, res) {
+    const { title, id } = req.body
+
+    Category.update({ title, slug: slugify(title) }, {
+      where: {
+        id
+      }
+    }).then(category => {
+
+      res.redirect('/admin/categories');
+
+    }).catch(err => console.log(err));
+  }
+
 }
 
 module.exports = CategoriesController;
